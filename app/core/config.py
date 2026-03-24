@@ -1,6 +1,7 @@
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from typing import List
 from pathlib import Path
-BASE_DIR = Path(__file__).resolve().parent.parent
+from pydantic_settings import BaseSettings, SettingsConfigDict
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 
@@ -9,7 +10,17 @@ class Settings(BaseSettings):
     DEBUG: bool = True
     DATABASE_URL: str = ""
     CLIENT_SECRETS_PATH: str = ""
-    model_config = SettingsConfigDict(env_file = BASE_DIR / ".env")
+    GOOGLE_CLIENT_ID: str = ""
+    GOOGLE_CLIENT_SECRET: str = ""
+    GOOGLE_ACCESS_TOKEN: str = ""
+    GOOGLE_REFRESH_TOKEN: str = ""
+    SCOPES: List[str] = [
+        "https://www.googleapis.com/auth/youtube.readonly"
+    ]
+    model_config = SettingsConfigDict(
+        env_file=BASE_DIR / ".env",
+        extra="ignore"
+    )
 
 
 settings = Settings()
