@@ -23,3 +23,4 @@ class QueueWorker:
                 )
             """)
             conn.commit()
+            
